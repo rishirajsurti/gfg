@@ -1,4 +1,20 @@
-#include <iostream>
+#include <bits/stdc++.h>
+using namespace std;
+int main(){
+	int t; scanf("%d", &t);
+	while(t--){
+		string s;
+		cin>>s;
+		sort(s.begin(), s.end());
+		do{
+			cout<<s<<" ";
+		} while(next_permutation(s.begin(), s.end()));
+		cout<<endl;
+	}
+	return 0;
+}
+
+/*#include <iostream>
 #include <string>
 #include <algorithm>
 using namespace std;
@@ -28,3 +44,4 @@ void Permute(string s, int i){
 		s[j] = c;
 	}
 }
+*/
