@@ -9,9 +9,12 @@ int main(){
 		a.clear();
 		a.assign(n, 0);
 		for(int i =0 ; i< n; scanf("%d", &a[i++]));
-		for(int i = 0; i < n; i++){
-			printf("element %d: %d\n", i, a[i]);
+		reverse(a.begin(), a.end());
+		for(int i =0 ; i< n; i++){
+			printf("%d ", a[i]);
 		}
+		printf("\n");
+
 	}
 	return 0;
 }
