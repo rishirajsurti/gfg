@@ -2,48 +2,48 @@
 using namespace std;
 
 string solve(string s){
-	string r= s, ans="";
-	reverse(r.begin(), r.end());
-	int n = r.length();
-	int dp[n+1][n+1];
-	string dir[n+1][n+1];
-	for(int i =0; i <= n; i++){
-		for(int j =0 ; j <= n; j++){
-			if(i==0 || j==0) dp[i][j] = 0;
-			else if(s[i-1]==r[j-1]) {
-				dp[i][j]= 1+dp[i-1][j-1];
-				dir[i][j] = "diag";
-			}
-			else{
-				if(dp[i-1][j] > dp[i][j-1]){
-					dp[i][j] = dp[i-1][j];
-					dir[i][j] = "up";
+	int n = s.length();
+	int dp[n][n];
+	memset(dp, 0, sizeof dp);
+	int start_idx, max_length;
+	for(int i =n-1 ; i >=0; i--){
+		dp[i][i] = 1;
+		max_length = 1;
+		start_idx = i;
+	}
+
+	for(int i =n-2 ;i >=0; i--){
+		if(s[i]==s[i+1]){
+			dp[i][i+1] =1;
+			max_length = 2;
+			start_idx = i;
+		}
+	}
+
+	for(int k = 1; k <= n; k++){
+		for(int i = 0; i < n-k+1; i++){
+			int j = i+k-1;
+			if(s[i]==s[j] && dp[i+1][j-1]){
+				dp[i][j] = 1;
+				if(k > max_length){
+					max_length = k;
+					start_idx = i;
 				}
-				else{
-					dp[i][j] = dp[i][j-1];
-					dir[i][j] = "left";
+				else if(k==max_length && i < start_idx){
+					start_idx = i;
 				}
 			}
 		}
 	}
-	int i =n, j = n;
-	while(i >= 0 && j >= 0){
-		if(dir[i][j]=="diag"){
-			ans += r[i-1];
-			i--; j--;
-		}
-		else if(dir[i][j] == "up") i--;
-		else if(dir[i][j] == "left") j--;
-	}
-	return ans;
+	return s.substr(start_idx, max_length);
 }
 
 int main(){
 	int t; scanf("%d", &t);
 	while(t--){
-		string s,r;
+		string s;
 		cin>>s;
-		cout<<solve(s)<<endl;;
+		cout<<solve(s)<<endl;
 	}
 	return 0;
 }
