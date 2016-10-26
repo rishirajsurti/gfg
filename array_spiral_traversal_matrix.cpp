@@ -4,14 +4,14 @@ typedef vector<int> vi;
 vector<vi> a;
 vi ans;
 
-void spiral(int N, int M){
+void spiral(int n, int m){
 	int n1, n2, m1, m2;
 	n1 = 0;
 	n2 = n-1;
 	m1 = 0;
 	m2 = m-1;
 
-	while(n1 < n2 && m1 < m2){
+	while(n1 <= n2 && m1 <= m2){
 		int i;
 		for(i = m1; i <= m2; i++){
 			ans.push_back(a[n1][i]);
@@ -33,7 +33,7 @@ void spiral(int N, int M){
 				ans.push_back(a[i][m1]);
 			}
 			m1++;
-			
+
 		}
 	}
 
@@ -52,6 +52,11 @@ int main(){
 			for(int j = 0; j < m; scanf("%d", &a[i][j++]));
 		}
 		spiral(n, m);
+
+		for(int i = 0; i < ans.size(); i++){
+			printf("%d ", ans[i]);
+		}
+		printf("\n");
 	}
 	return 0;
 }
